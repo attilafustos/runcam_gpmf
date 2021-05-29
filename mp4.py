@@ -100,6 +100,7 @@ def find_atom(f, fourcc):
         if fourcc2 == fourcc:
             # return data_offset, data_size
             return f.tell() + atom_head_size, size - atom_head_size
+            
         f.seek(f.tell() + size)
         
 def skip_atom(f):

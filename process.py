@@ -209,8 +209,10 @@ def processVideo(source_video_path, blackbox_path, bboffset1, bboffset2, bbtime1
 
 
     fin.seek(mdat_data_offset)
+    
     while mdat_data_size:
         chunk_size = min(mdat_data_size, int(10e6))
+        
         fout.write(fin.read(chunk_size))
         mdat_data_size -= chunk_size
 
