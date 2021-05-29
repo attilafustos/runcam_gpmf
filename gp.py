@@ -9,7 +9,7 @@ import tkinter as tk
 thread_queue = queue.Queue();
 top = Tk()
 top.geometry("620x500")
-top.title("GPMF Emulation 2021.02.08.1")
+top.title("RuncamGPMF 2021.04.13.1")
 
 def loadVideoCallBack():
    video_path = askopenfilename()
@@ -65,7 +65,7 @@ txVideoFile = StringVar()
 txBlBoxFile = StringVar()
 
 btLoadVideo = Button(top, width=15, text = "Load video file", command = loadVideoCallBack).place(x = 20, y = 20)
-btLoadBlBox = Button(top, width=15, text = "Load blackbox file", command = loadBlBoxCallBack).place(x = 20, y = 60)
+btLoadBlBox = Button(top, width=15, text = "Load gyro file", command = loadBlBoxCallBack).place(x = 20, y = 60)
 lbVideoPath = Label(top, textvariable = txVideoFile).place(x = 150, y = 20)
 lbBlBoxPath = Label(top, textvariable = txBlBoxFile).place(x = 150, y = 60)
 lbStatus = Label(top, text = "Status").place(x = 20, y = 254)
@@ -73,7 +73,8 @@ lbProfile = Label(top, text = "Profile").place(x = 20, y = 175)
 lbAngle = Label(top, text = "Camera angle").place(x = 315, y = 175)
 txAngle = Entry(top, width=4)
 txAngle.place(x = 410, y = 175)
-txAngle.insert(0, "30")
+txAngle.insert(0, "0")
+
 
 profiles = [
     'Hero5 1080 Wide 16:9 1920x1080',

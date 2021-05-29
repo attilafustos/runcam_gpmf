@@ -17,13 +17,35 @@ def read(f, camera_angle, x_flip, y_flip, z_flip):
         if not gyro_index and len(row) > 2:
             # read the positions of the columns of interest
             time_index = row.index('time') # should be 1
-            gyro_index = row.index('gyroADC[0]')
+            gyro_index = row.index('x')
         elif gyro_index:
-            tm = float(row[time_index]) / 1e6 # usec to sec
+            tm = float(row[time_index]) / 1e3 # usec to sec
+            
+            #print(tm)
             if time_at_arm is None:
                 time_at_arm = tm
             t.append(tm - time_at_arm)
-            gyros = tuple(map(lambda x: float(x)*np.pi/180, row[gyro_index:gyro_index+3]))
+            #gyros = tuple(map(lambda x: float(x)*np.pi/180, row[gyro_index:gyro_index+3]))
+            coef = float(500)/float(32768)
+            gyros = tuple(map(lambda x: float(x)*coef * np.pi/180 , row[gyro_index:gyro_index+3]))
+            #print(gyros)
+            
+            runcam_gyros = list(gyros)
+            
+            # runcam 5 gyros are wrong order
+            gyro_x = runcam_gyros[1]*-1
+            gyro_y = runcam_gyros[2]*-1
+            gyro_z = runcam_gyros[0]*-1
+
+            
+            runcam_gyros[0] = gyro_x
+            runcam_gyros[1] = gyro_y
+            runcam_gyros[2] = gyro_z
+            
+            gyros=tuple(runcam_gyros)
+            
+            #print(gyros)
+            
             flip_gyros = list(gyros)
             if x_flip==1:
                 flip_gyros[0]=flip_gyros[0]*-1

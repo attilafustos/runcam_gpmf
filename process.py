@@ -81,6 +81,7 @@ def processVideo(source_video_path, blackbox_path, bboffset1, bboffset2, bbtime1
     thread_queue.put(fin_name, basepath, basename)
 
     fbbox = open(blackbox_path)
+    print("Source file:" + source_video_path_corrected);
     fin = open(source_video_path_corrected, 'rb')
     
 
